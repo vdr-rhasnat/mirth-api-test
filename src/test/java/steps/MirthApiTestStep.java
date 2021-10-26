@@ -18,8 +18,8 @@ public class MirthApiTestStep {
     private String responseBody;
 
     @Given("HL7 message")
-    public void hlMessage(String docString) {
-        hl7Message = docString;
+    public void hlMessage(String message) {
+        hl7Message = message;
     }
 
     @When("I hit the endpoint {string}")
@@ -42,10 +42,8 @@ public class MirthApiTestStep {
     }
 
     @And("I should receive JSON object")
-    public void iShouldReceiveJSONObject(String docString) throws JSONException {
-        String jsonString = docString.trim();
+    public void iShouldReceiveJSONObject(String expectedJson) throws JSONException {
+        String jsonString = expectedJson.trim();
         JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
-//        System.out.println("******** Response Body ********");
-//        System.out.println(responseBody);
     }
 }
