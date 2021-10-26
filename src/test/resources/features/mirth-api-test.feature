@@ -9,3 +9,32 @@ Feature: Mirth API Test
         """
     When I hit the endpoint "http://localhost:8086/patient/"
     Then I should receive status code 200
+    And I should receive JSON object
+        """
+        {
+          "Id": "NW",
+          "Patient": {
+              "Id": "G1027",
+              "LastName": "Katie",
+              "FirstName": "Keller",
+              "DOB": "19791019",
+              "MiddleName": "C",
+              "Addresses": [
+                  {
+                      "Street1": "458 MITCHELL  ST",
+                      "City": "BELLEVILLE",
+                      "State": "WI",
+                      "Zip": "53508",
+                      "Country": "",
+                      "AddressType": ""
+                  }
+              ],
+              "PhoneNumbers": [
+                  {
+                      "Number": "(408)271-9000"
+                  }
+              ],
+              "Sex": "F"
+          }
+      }
+      """

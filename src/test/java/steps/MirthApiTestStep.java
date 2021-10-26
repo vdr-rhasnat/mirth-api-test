@@ -1,16 +1,21 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import org.json.JSONException;
 import org.junit.Assert;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import static io.restassured.RestAssured.given;
 
 public class MirthApiTestStep {
     private int apiStatus;
     private String hl7Message;
+    private String responseBody;
 
     @Given("HL7 message")
     public void hlMessage(String docString) {
@@ -25,13 +30,22 @@ public class MirthApiTestStep {
                 body(hl7Message).
                 post(endpoint);
 
-        response.prettyPrint();
+        //response.prettyPrint();
 
         apiStatus = response.statusCode();
+        responseBody = response.body().asString();
     }
 
     @Then("I should receive status code {int}")
     public void iShouldReceiveStatusCode(int resStatus) {
         Assert.assertEquals(resStatus, apiStatus);
+    }
+
+    @And("I should receive JSON object")
+    public void iShouldReceiveJSONObject(String docString) throws JSONException {
+        String jsonString = docString.trim();
+        JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
+//        System.out.println("******** Response Body ********");
+//        System.out.println(responseBody);
     }
 }
