@@ -13,7 +13,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import static io.restassured.RestAssured.given;
 
 public class MirthApiTestStep {
-    private int apiStatus;
+    private Integer apiStatus;
     private String hl7Message;
     private String responseBody;
 
@@ -22,13 +22,13 @@ public class MirthApiTestStep {
         hl7Message = message;
     }
 
-    @When("I hit the endpoint {string}")
-    public void iHitTheEndpoint(String endpoint) {
+    @When("I hit the mirth endpoint {string}")
+    public void iHitTheMirthEndpoint(String endpoint) {
         Response response =
                 given().
-                header("Content-Type", "text/plain").
-                body(hl7Message).
-                post(endpoint);
+                        header("Content-Type", "text/plain").
+                        body(hl7Message).
+                        post(endpoint);
 
         //response.prettyPrint();
 
@@ -36,9 +36,9 @@ public class MirthApiTestStep {
         responseBody = response.body().asString();
     }
 
-    @Then("I should receive status code {int}")
-    public void iShouldReceiveStatusCode(int resStatus) {
-        Assert.assertEquals(resStatus, apiStatus);
+    @Then("I should receive response code {string}")
+    public void iShouldReceiveResponseCode(String resStatus) {
+        Assert.assertEquals(resStatus, apiStatus.toString());
     }
 
     @And("I should receive JSON object")

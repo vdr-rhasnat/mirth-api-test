@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions (
         features = "src/test/resources/features",
         glue = "steps",
-        publish = true,
-        plugin = { "pretty", "html:target/cucumber-pretty.html", "json:target/cucumber/cucumber.json" }
+        strict = true,
+        plugin = { "com.qmetry.qaf.automation.cucumber.QAFCucumberPlugin", "pretty", "html:target/cucumber-pretty.html", "json:target/cucumber/cucumber.json" }
 )
 public class TestRunner {
 }
