@@ -5,11 +5,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import net.javacrumbs.jsonunit.core.Option;
 import org.json.JSONException;
 import org.junit.Assert;
 
 import static io.restassured.RestAssured.given;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+import static net.javacrumbs.jsonunit.core.ConfigurationWhen.paths;
+import static net.javacrumbs.jsonunit.core.ConfigurationWhen.then;
 
 public class MirthApiTestStep {
     private Integer apiStatus;
@@ -45,7 +48,9 @@ public class MirthApiTestStep {
         String jsonString = expectedJson.trim();
         //JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
         assertThatJson(responseBody)
-                .whenIgnoringPaths("Id", "Scripts[*].BatchId", "Scripts[*].Urgency", "Scripts[*].HOA.Doses[*].AdminDateTime")
+                .when(Option.IGNORING_EXTRA_FIELDS)
+                .when(Option.IGNORING_ARRAY_ORDER)
+                .when(paths("Id", "Scripts[*].BatchId", "Scripts[*].Urgency", "Scripts[*].HOA.Doses[*].AdminDateTime"), then(Option.IGNORING_VALUES))
                 .isEqualTo(jsonString);
     }
 }
