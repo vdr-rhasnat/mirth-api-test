@@ -7,10 +7,9 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.json.JSONException;
 import org.junit.Assert;
-import org.skyscreamer.jsonassert.JSONAssert;
-import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import static io.restassured.RestAssured.given;
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 
 public class MirthApiTestStep {
     private Integer apiStatus;
@@ -44,6 +43,9 @@ public class MirthApiTestStep {
     @And("I should receive JSON object")
     public void iShouldReceiveJSONObject(String expectedJson) throws JSONException {
         String jsonString = expectedJson.trim();
-        JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
+        //JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
+        assertThatJson(responseBody)
+                .whenIgnoringPaths("Id", "Scripts[*].BatchId", "Scripts[*].Urgency", "Scripts[*].HOA.Doses[*].AdminDateTime")
+                .isEqualTo(jsonString);
     }
 }
