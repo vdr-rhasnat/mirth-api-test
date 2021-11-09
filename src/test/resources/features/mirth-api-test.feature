@@ -11,3 +11,4 @@ Feature: Mirth API Test
       """
       ${jsonObject}
       """
+    And Value of Id should match value of BatchId
