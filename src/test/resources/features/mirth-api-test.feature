@@ -1,6 +1,6 @@
 Feature: Mirth API Test
   @dataFile:mirth_test_cases/mirth_conversion_test_cases.xls
-  Scenario: JSON object test from Mirth API response
+  Scenario: ${testCase}
     Given HL7 message
       """
       ${hl7Message}
