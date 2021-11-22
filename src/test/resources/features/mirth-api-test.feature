@@ -1,9 +1,9 @@
 Feature: Mirth API Test
   @dataFile:mirth_test_cases/mirth_conversion_test_cases.xls
   Scenario: ${testCase}
-    Given HL7 message
+    Given message
       """
-      ${hl7Message}
+      ${message}
       """
     When I hit the mirth endpoint "${endpoint}"
     Then I should receive response code "${statusCode}"

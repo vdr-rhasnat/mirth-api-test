@@ -21,8 +21,8 @@ public class MirthApiTestStep {
     private String hl7Message;
     private String responseBody;
 
-    @Given("HL7 message")
-    public void hlMessage(String message) {
+    @Given("message")
+    public void message(String message) {
         hl7Message = message;
     }
 
