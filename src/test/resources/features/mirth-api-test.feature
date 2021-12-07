@@ -7,7 +7,7 @@ Feature: Mirth API Test
       """
     When I hit the mirth endpoint "${endpoint}"
     Then I should receive response code "${statusCode}"
-    And I should receive JSON object
+    And I should receive expected JSON object
       """
       ${jsonObject}
       """

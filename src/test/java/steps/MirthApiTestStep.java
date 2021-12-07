@@ -45,14 +45,14 @@ public class MirthApiTestStep {
         Assert.assertEquals(resStatus, apiStatus.toString());
     }
 
-    @And("I should receive JSON object")
+    @And("I should receive expected JSON object")
     public void iShouldReceiveJSONObject(String expectedJson) throws JSONException {
         String jsonString = expectedJson.trim();
         //JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
         assertThatJson(responseBody)
                 .when(Option.IGNORING_EXTRA_FIELDS)
                 .when(Option.IGNORING_ARRAY_ORDER)
-                .when(paths("Id", "Scripts[*].BatchId", "Scripts[*].Urgency", "Scripts[*].HOA.Doses[*].AdminDateTime"), then(Option.IGNORING_VALUES))
+                .when(paths("Id", "Scripts[*].BatchId", "Scripts[*].Urgency", "Scripts[*].HOA.Doses[*].AdminDateTime", "Scripts[0].HOA.StartDate", "Scripts[0].HOA.EndDate"), then(Option.IGNORING_VALUES))
                 .isEqualTo(jsonString);
     }
 
