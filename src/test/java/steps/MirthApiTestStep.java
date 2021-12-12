@@ -45,7 +45,7 @@ public class MirthApiTestStep {
         Assert.assertEquals(resStatus, apiStatus.toString());
     }
 
-    @And("I should receive expected JSON object")
+    @Then("I should receive expected JSON object")
     public void iShouldReceiveJSONObject(String expectedJson) throws JSONException {
         String jsonString = expectedJson.trim();
         //JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
