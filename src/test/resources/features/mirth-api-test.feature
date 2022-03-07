@@ -5,9 +5,9 @@ Feature: Mirth API Test
       """
       ${message}
       """
-    When I hit the mirth endpoint "${endpoint}"
-    Then I should receive response code "${statusCode}"
-    And I should receive expected JSON object
+    When user hit the endpoint "${endpoint}"
+    Then user should receive response code "${statusCode}"
+    And user should receive expected JSON object
       """
       ${jsonObject}
       """

@@ -26,7 +26,7 @@ public class MirthApiTestStep {
         hl7Message = message;
     }
 
-    @When("I hit the mirth endpoint {string}")
+    @When("user hit the endpoint {string}")
     public void iHitTheMirthEndpoint(String endpoint) {
         Response response =
                 given().
@@ -40,12 +40,12 @@ public class MirthApiTestStep {
         responseBody = response.body().asString();
     }
 
-    @Then("I should receive response code {string}")
+    @Then("user should receive response code {string}")
     public void iShouldReceiveResponseCode(String resStatus) {
         Assert.assertEquals(resStatus, apiStatus.toString());
     }
 
-    @Then("I should receive expected JSON object")
+    @Then("user should receive expected JSON object")
     public void iShouldReceiveJSONObject(String expectedJson) throws JSONException {
         String jsonString = expectedJson.trim();
         //JSONAssert.assertEquals(jsonString, responseBody, JSONCompareMode.LENIENT);
