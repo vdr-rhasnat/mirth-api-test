@@ -1,5 +1,6 @@
 package steps;
 
+import Context.GlobalContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 import io.cucumber.java.en.And;
@@ -18,12 +19,11 @@ import static net.javacrumbs.jsonunit.core.ConfigurationWhen.then;
 
 public class MirthApiTestStep {
     private Integer apiStatus;
-    private String hl7Message;
     private String responseBody;
 
     @Given("message")
     public void message(String message) {
-        hl7Message = message;
+        GlobalContext.hl7Message = message;
     }
 
     @When("user hit the endpoint {string}")
@@ -31,7 +31,7 @@ public class MirthApiTestStep {
         Response response =
                 given().
                         header("Content-Type", "text/plain").
-                        body(hl7Message).
+                        body(GlobalContext.hl7Message).
                         post(endpoint);
 
         //response.prettyPrint();
