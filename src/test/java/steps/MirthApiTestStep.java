@@ -23,7 +23,7 @@ public class MirthApiTestStep {
 
     @Given("message")
     public void message(String message) {
-        GlobalContext.hl7Message = message;
+        GlobalContext.Message = message;
     }
 
     @When("user hit the endpoint {string}")
@@ -31,7 +31,7 @@ public class MirthApiTestStep {
         Response response =
                 given().
                         header("Content-Type", "text/plain").
-                        body(GlobalContext.hl7Message).
+                        body(GlobalContext.Message).
                         post(endpoint);
 
         //response.prettyPrint();
