@@ -5,6 +5,6 @@ Feature: Nursing Home Flat File Generation Test
       """
       ${hl7-message}
       """
-    When user hit on server with the IP address "${ip-address}" on port ${port}
-    Then user should check the fileName with fileUrl "${file-url}"
+    When user hit the server with the IP address "${ip-address}" on port ${port}
+    Then user should get the file from the filepath "${file-path}"
     And user should receive the patient medication details "${patient-medication-details}"

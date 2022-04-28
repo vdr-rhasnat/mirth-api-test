@@ -9,15 +9,15 @@ import org.junit.Assert;
 
 public class NursingHomeFileGenerationTestStep {
     GenericFactory gf = new GenericFactory();
-    @When("user hit on server with the IP address {string} on port {int}")
-    public void  userHitOnServerWithTheIpAddressOnPort(String ipAddress, Integer port) {
+    @When("user hit the server with the IP address {string} on port {int}")
+    public void  userHitTheServerWithTheIpAddressOnPort(String ipAddress, Integer port) {
        boolean isMessageSentToServer = gf.isMessageSentToServer(ipAddress,port);
        Assert.assertTrue("Message cannot send to the Server", isMessageSentToServer);
     }
 
-    @Then("user should check the fileName with fileUrl {string}")
-    public void userShouldCheckTheFileNameWithFileUrl(String fileUrl) {
-        String fileName = gf.getFileName(fileUrl);
+    @Then("user should get the file from the filepath {string}")
+    public void userShouldGetTheFileFromTheFilePath(String filePath) {
+        String fileName = gf.getFileName(filePath);
         String extension = FilenameUtils.getExtension(fileName);
         boolean isFileExist = gf.checkFileIsExistOrNot(fileName, extension);
         Assert.assertTrue("FileName Is Not Exist ",isFileExist);
